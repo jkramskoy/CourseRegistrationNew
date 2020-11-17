@@ -1,10 +1,10 @@
 @model IEnumerable<CourseRegistrationProgram.Models.Courses>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Courses";
 }
 
-<h1>Index</h1>
+<h1>Courses: </h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CourseNumber)
+                Course Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CourseName)
+                Course Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CourseDescription)
+               Course Description
             </th>
             <th></th>
         </tr>
