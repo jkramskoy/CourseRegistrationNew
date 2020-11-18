@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseRegistrationNew.Models;
-using CourseRegistrationProgram.Models;
 
 namespace CourseRegistrationNew.Controllers
 {
@@ -29,6 +28,7 @@ namespace CourseRegistrationNew.Controllers
 
             return View(instructors);
             */
+            ViewBag.Courses = _context.Courses.ToList();
 
             var listIstructors = await _context.Instructors.Include("Courses").ToListAsync();
 

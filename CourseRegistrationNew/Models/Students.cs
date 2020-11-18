@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using CourseRegistrationNew.Models;
 
-namespace CourseRegistrationProgram.Models
+namespace CourseRegistrationNew.Models
 {
     public class Students
     {

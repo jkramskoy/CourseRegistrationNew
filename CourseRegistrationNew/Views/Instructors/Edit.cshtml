@@ -1,10 +1,11 @@
-@model CourseRegistrationProgram.Models.Instructors
+@model CourseRegistrationNew.Models.Instructors
 
 @{
     ViewData["Title"] = "Edit";
 }
 
 <h1>Edit</h1>
+
 
 <h4>Instructors</h4>
 <hr />
@@ -32,12 +33,24 @@
                 <label asp-for="Courses.CourseName" class="control-label"></label>
                 <input asp-for="Courses.CourseName" class="form-control" />
                 <span asp-validation-for="Courses.CourseName" class="text-danger"></span>
+
             </div>
-            <div class="form-group">
-                <label asp-for="Courses.CourseName" class="control-label"></label>
-                <input asp-for="Courses.CourseName" class="form-control" />
-                <span asp-validation-for="Courses.CourseName" class="text-danger"></span>
-            </div>
+            
+                @if (ViewBag.Courses != null)
+                {
+                    <div>
+                        <h4>Courses:</h4>
+                        <dl class="dl-horizontal">
+
+                            foreach (var item in ViewBag.Courses)
+                            {
+                            <dt>Name: </dt>
+                            <dd>item.CourseName</dd>
+                        
+                            }
+                        </dl>
+                    </div>
+                }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

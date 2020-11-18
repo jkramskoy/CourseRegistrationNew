@@ -1,5 +1,4 @@
 ﻿using System;
-using CourseRegistrationProgram.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseRegistrationNew.Models

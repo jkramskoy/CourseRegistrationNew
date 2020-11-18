@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CourseRegistrationNew.Models;
 
-namespace CourseRegistrationProgram.Models
+namespace CourseRegistrationNew.Models
 {
     public class Courses
     {
