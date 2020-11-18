@@ -28,8 +28,7 @@ namespace CourseRegistrationNew.Controllers
 
             return View(instructors);
             */
-            ViewBag.Courses = _context.Courses.ToList();
-
+           
             var listIstructors = await _context.Instructors.Include("Courses").ToListAsync();
 
             return View(listIstructors);
@@ -90,6 +89,7 @@ namespace CourseRegistrationNew.Controllers
             {
                 return NotFound();
             }
+            ViewData["Courses"] = _context.Courses.ToList();
             return View(instructors);
         }
 
@@ -98,7 +98,7 @@ namespace CourseRegistrationNew.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("InstructorId,FirstName,LastName,EmailAddress,Course,CourseID")] Instructors instructors)
+        public async Task<IActionResult> Edit(int id, [Bind("InstructorId,FirstName,LastName,EmailAddress,CourseName")] Instructors instructors)
         {
             if (id != instructors.InstructorId)
             {
