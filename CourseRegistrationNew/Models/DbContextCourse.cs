@@ -17,7 +17,7 @@ namespace CourseRegistrationNew.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(@"server=localhost;user=root;password=amy251202;database=CoursRegistration");
+            optionsBuilder.UseMySQL(@"server=localhost;user=root;password=amy251202;database=CourseRegistration");
         }
 
 

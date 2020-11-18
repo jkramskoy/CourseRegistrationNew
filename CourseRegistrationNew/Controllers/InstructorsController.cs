@@ -22,7 +22,17 @@ namespace CourseRegistrationNew.Controllers
         // GET: Instructors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Instructors.ToListAsync());
+            /*List<Instructors> instructors = _context
+               .Instructors
+               .Include("Courses")
+               .ToList();
+
+            return View(instructors);
+            */
+
+            var listIstructors = await _context.Instructors.Include("Courses").ToListAsync();
+
+            return View(listIstructors);
         }
 
         // GET: Instructors/Details/5
@@ -34,6 +44,7 @@ namespace CourseRegistrationNew.Controllers
             }
 
             var instructors = await _context.Instructors
+                .Include("Courses")
                 .FirstOrDefaultAsync(m => m.InstructorId == id);
             if (instructors == null)
             {
@@ -73,7 +84,8 @@ namespace CourseRegistrationNew.Controllers
                 return NotFound();
             }
 
-            var instructors = await _context.Instructors.FindAsync(id);
+            var instructors = await _context.Instructors
+                .FindAsync(id);
             if (instructors == null)
             {
                 return NotFound();

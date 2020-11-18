@@ -26,7 +26,7 @@ namespace CourseRegistrationNew
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<DbContextCourse>(options => options.UseMySQL(@"server=localhost;user=root;password=amy251202;database=CoursRegistration"));
+            services.AddDbContext<DbContextCourse>(options => options.UseMySQL(@"server=localhost;user=root;password=amy251202;database=CourseRegistration"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

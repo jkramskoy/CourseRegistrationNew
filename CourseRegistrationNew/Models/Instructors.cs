@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourseRegistrationProgram.Models
 {
@@ -24,7 +25,8 @@ namespace CourseRegistrationProgram.Models
         public string EmailAddress { get; set; }
         public string Course { get; set; }
 
-        public virtual int CourseID { set; get; }
+        [ForeignKey("CourseId")]
+        //public virtual int CourseID { set; get; }
         public Courses Courses { set; get; }
 
 

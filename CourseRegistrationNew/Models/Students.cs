@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CourseRegistrationNew.Models;
 
@@ -22,9 +21,9 @@ namespace CourseRegistrationProgram.Models
         [Display(Name = "Last Name")]
         [StringLength(50)]
         public string LastName { get; set; }
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string EmailAddress { get; set; }
-        [DataType(DataType.PhoneNumber)]
+        [Phone(ErrorMessage = "Invalid Telephone number")]
         public string PhoneNumber { get; set; }
 
         // acording to data studenr can take few corses
