@@ -38,40 +38,39 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-
 <div>
     <h4>Courses:</h4>
-    <dl class="dl-horizontal">
+
+    <dl class="row-12">
 
 
         @foreach (var item in ViewBag.Courses)
         {
-<dt>Name: </dt>
-                <dd>@item.CourseName</dd>}
+                <dt class="col-sm-3">Name: </dt>
+                <dd class="col-sm-9">@item.CourseName</dd>
+         }
 
     </dl>
 </div>
 
 @if (ViewBag.AvailableCourses != null)
 {
-    <div>
-        <h4>Add Course:</h4>
+<div>
+    <h4>Add Course:</h4>
 
-        @using (Html.BeginForm("AddCourse", "CoursesStudents", FormMethod.Get))
-        {
-            @Html.Hidden("StudentId", Model.StudentID)
-            @Html.DropDownList("CourseId",
-                                          new SelectList(ViewBag.AvailableCourses, "CourseID", "CourseName"))
+    @using (Html.BeginForm("AddCourse", "CoursesStudents", FormMethod.Get))
+    {
+@Html.Hidden("StudentId", Model.StudentID)
+                    @Html.DropDownList("CourseId",
+                                                       new SelectList(ViewBag.AvailableCourses, "CourseID", "CourseName"))
 
 
-            <input type="submit" value="Add" class="btn btn-primary" />}
-    </div>
-}
+                                        <input type="submit" value="Add" class="btn btn-primary" />}
+</div>}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
 
 
 @section Scripts {
