@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
+using CourseRegistrationNew.Models;
 
 namespace CourseRegistrationNew.Models
 {
@@ -18,6 +19,8 @@ namespace CourseRegistrationNew.Models
         {
             optionsBuilder.UseMySQL(@"server=localhost;user=root;password=amy251202;database=CourseRegistration");
         }
+
+        public DbSet<CourseRegistrationNew.Models.CoursesStudents> CoursesStudents { get; set; }
 
 
     }

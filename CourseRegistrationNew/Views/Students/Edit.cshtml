@@ -1,8 +1,7 @@
+
 @model CourseRegistrationNew.Models.Students
 
-@{
-    ViewData["Title"] = "Edit";
-}
+@{ ViewData["Title"] = "Edit"; }
 
 <h1>Edit</h1>
 
@@ -43,6 +42,36 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<div>
+    <h4>Courses:</h4>
+    <dl class="dl-horizontal">
+
+
+        @foreach (var item in ViewBag.Courses)
+        {
+<dt>Name: </dt>
+                <dd>@item.CourseName</dd>
+}
+
+    </dl>
+</div>
+
+<div>
+    <h4>Add Course:</h4>
+
+        @using (Html.BeginForm("AddCourse", "StudentCourse", FormMethod.Get))
+        {
+                @Html.Hidden("StudentId", Model.StudentID)
+                @Html.DropDownList("CourseId",
+                             new SelectList(ViewBag.AvailableCourses, "CourseID", "CourseName"))
+         
+
+               <input type="submit" value="Add" class="btn btn-primary" />
+        }
+</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

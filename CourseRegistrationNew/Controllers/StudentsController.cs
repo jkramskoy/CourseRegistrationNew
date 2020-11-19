@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseRegistrationNew.Models;
+
 
 namespace CourseRegistrationNew.Controllers
 {
@@ -34,6 +32,16 @@ namespace CourseRegistrationNew.Controllers
 
             var students = await _context.Students
                 .FirstOrDefaultAsync(m => m.StudentID == id);
+
+            var courses =  await _context.CoursesStudents
+               .Where(sc => sc.StudentID == id)
+               .Select(c => c.Course)
+               .ToListAsync();
+
+            ViewBag.Courses = courses;
+
+
+
             if (students == null)
             {
                 return NotFound();
@@ -73,6 +81,20 @@ namespace CourseRegistrationNew.Controllers
             }
 
             var students = await _context.Students.FindAsync(id);
+
+            //take all courses
+            var courses =  _context.CoursesStudents
+               .Where(sc => sc.StudentID == id)
+               .Select(c => c.Course)
+               .ToList();
+
+            ViewBag.Courses = courses;
+
+            //all courses minus couses that sudent registered
+            ViewBag.AvailableCourses = _context.Courses.AsEnumerable()
+                .Except(courses)
+                .ToList();
+
             if (students == null)
             {
                 return NotFound();
