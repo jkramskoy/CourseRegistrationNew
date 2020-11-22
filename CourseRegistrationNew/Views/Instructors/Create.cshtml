@@ -27,15 +27,11 @@
                 <input asp-for="EmailAddress" class="form-control" />
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
+           
             <div class="form-group">
-                <label asp-for="Course" class="control-label"></label>
-                <input asp-for="Course" class="form-control" />
-                <span asp-validation-for="Course" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Courses.CourseName" class="control-label"></label>
-                <input asp-for="Courses.CourseName" class="form-control" />
-                <span asp-validation-for="Courses.CourseName" class="text-danger"></span>
+                <label asp-for="Courses" class="control-label">Courses:</label> <br />
+                @Html.DropDownList("CourseId",
+                         new SelectList(ViewBag.Courses, "CourseID", "CourseName"))
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

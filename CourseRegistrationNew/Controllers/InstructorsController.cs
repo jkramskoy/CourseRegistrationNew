@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseRegistrationNew.Models;
 
+
 namespace CourseRegistrationNew.Controllers
 {
     public class InstructorsController : Controller
@@ -21,13 +22,7 @@ namespace CourseRegistrationNew.Controllers
         // GET: Instructors
         public async Task<IActionResult> Index()
         {
-            /*List<Instructors> instructors = _context
-               .Instructors
-               .Include("Courses")
-               .ToList();
-
-            return View(instructors);
-            */
+           
            
             var listIstructors = await _context.Instructors.Include("Courses").ToListAsync();
 
@@ -56,6 +51,7 @@ namespace CourseRegistrationNew.Controllers
         // GET: Instructors/Create
         public IActionResult Create()
         {
+            ViewBag.Courses = _context.Courses.AsEnumerable().ToList();
             return View();
         }
 
@@ -64,15 +60,22 @@ namespace CourseRegistrationNew.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InstructorId,FirstName,LastName,EmailAddress,Course,CourseID")] Instructors instructors)
+        public async Task<IActionResult> Create([Bind("InstructorId,FirstName,LastName,EmailAddress")] Instructors instructor,Courses course)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(instructors);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (course != null) {
+                    var newCourse = _context.Courses.Where(c => c.CourseID == course.CourseID).SingleOrDefault();
+
+                    instructor.InstructorId = _context.Instructors.AsEnumerable().Last().InstructorId + 1;
+
+                    instructor.Courses = newCourse;
+                    _context.Add(instructor);
+                    await _context.SaveChangesAsync();
+                    // return RedirectToAction(nameof(Index));
+                }
             }
-            return View(instructors);
+            return RedirectToAction("Index");
         }
 
         // GET: Instructors/Edit/5
@@ -83,14 +86,17 @@ namespace CourseRegistrationNew.Controllers
                 return NotFound();
             }
 
-            var instructors = await _context.Instructors
-                .FindAsync(id);
-            if (instructors == null)
+            var instructor = await _context.Instructors
+                 .Include("Courses")
+                 .FirstOrDefaultAsync(m => m.InstructorId == id);
+
+            if (instructor == null)
             {
                 return NotFound();
             }
-            ViewData["Courses"] = _context.Courses.ToList();
-            return View(instructors);
+            ViewBag.CourseId = instructor.Courses.CourseID;
+            ViewBag.Courses = _context.Courses.AsEnumerable().ToList();
+            return View(instructor);
         }
 
         // POST: Instructors/Edit/5
@@ -98,8 +104,10 @@ namespace CourseRegistrationNew.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("InstructorId,FirstName,LastName,EmailAddress,CourseName")] Instructors instructors)
+        public async Task<IActionResult> Edit(int id, [Bind("InstructorId,FirstName,LastName,EmailAddress,CourseName")] Instructors instructors, Courses course)
         {
+
+           
             if (id != instructors.InstructorId)
             {
                 return NotFound();
@@ -109,7 +117,12 @@ namespace CourseRegistrationNew.Controllers
             {
                 try
                 {
-                    _context.Update(instructors);
+                    if (course != null) {
+                        var newCourse = _context.Courses.Where(c => c.CourseID == course.CourseID).SingleOrDefault();
+
+                        instructors.Courses = newCourse;
+                    }
+                   _context.Update(instructors);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

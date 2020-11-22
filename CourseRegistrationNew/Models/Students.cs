@@ -21,9 +21,11 @@ namespace CourseRegistrationNew.Models
         [Display(Name = "Last Name")]
         [StringLength(50)]
         public string LastName { get; set; }
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [RegularExpression(@"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$",
+            ErrorMessage = "Invalid Email Format")]
         public string EmailAddress { get; set; }
-        [Phone(ErrorMessage = "Invalid Telephone number")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+            ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
 
         // acording to data studenr can take few corses

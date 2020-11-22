@@ -60,13 +60,13 @@
 
     @using (Html.BeginForm("AddCourse", "CoursesStudents", FormMethod.Get))
     {
-@Html.Hidden("StudentId", Model.StudentID)
+                    @Html.Hidden("StudentId", Model.StudentID)
                     @Html.DropDownList("CourseId",
-                                                       new SelectList(ViewBag.AvailableCourses, "CourseID", "CourseName"))
+                           new SelectList(ViewBag.AvailableCourses, "CourseID", "CourseName"))
 
-
-                                        <input type="submit" value="Add" class="btn btn-primary" />}
+                    <input type="submit" value="Add" class="btn btn-primary" />}
 </div>}
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
@@ -75,4 +75,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }

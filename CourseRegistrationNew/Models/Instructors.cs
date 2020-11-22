@@ -22,7 +22,8 @@ namespace CourseRegistrationNew.Models
         [Display(Name = "Last Name")]
         [StringLength(50)]
         public string LastName { get; set; }
-        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$",
+            ErrorMessage = "Invalid Email Format")]
         public string EmailAddress { get; set; }
         public string Course { get; set; }
 
