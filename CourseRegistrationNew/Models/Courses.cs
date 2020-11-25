@@ -14,11 +14,14 @@ namespace CourseRegistrationNew.Models
 
         [Key]
         public int CourseID { get; set; }
+        
         public string CourseNumber { get; set; }
 
+        
         [StringLength(50, MinimumLength = 3)]
         public string CourseName { get; set; }
 
+        
         [StringLength(50, MinimumLength = 3)]
         public string CourseDescription { get; set; }
 

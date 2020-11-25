@@ -31,4 +31,5 @@ namespace CourseRegistrationNew.Models
         // acording to data studenr can take few corses
         public List<CoursesStudents> CoursesList { set; get; }
     }
+
 }
