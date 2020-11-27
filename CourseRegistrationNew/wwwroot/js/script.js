@@ -18,7 +18,22 @@ var Validations = /** @class */ (function () {
                 output.innerHTML = '';
             }
         }
-        console.log(element.value);
+    };
+    Validations.prototype.LastNameValidation = function () {
+        var element = document.getElementById('inputLastName');
+        var input = element.value;
+        var output = document.getElementById('LastNameValidationMessage');
+        if (output !== null) {
+            if (input.length === 0) {
+                output.innerHTML = "<span style='color: blue'>* Field Last Name is required</span>";
+            }
+            else if (input.length >= 50) {
+                output.innerHTML = "<span style='color: blue'>* Field Last Name length should be less than 50</span>";
+            }
+            else {
+                output.innerHTML = '';
+            }
+        }
     };
     //Phone Validation
     Validations.prototype.PhoneNumberValidation = function () {
@@ -55,10 +70,14 @@ var Validations = /** @class */ (function () {
 window.onload = function () {
     var obj = new Validations();
     var nameInput = document.getElementById('inputName');
+    var lastnameInput = document.getElementById('inputLastName');
     var emailInput = document.getElementById('inputEmail');
     var phoneInput = document.getElementById('inputPhone');
     if (nameInput != null) {
         nameInput.onblur = obj.NameValidation;
+    }
+    if (lastnameInput != null) {
+        lastnameInput.onblur = obj.LastNameValidation;
     }
     if (emailInput != null) {
         emailInput.onblur = obj.EmailValidation;
