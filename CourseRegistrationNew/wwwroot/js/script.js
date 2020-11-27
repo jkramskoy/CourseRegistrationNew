@@ -6,8 +6,8 @@ var Validations = /** @class */ (function () {
     Validations.prototype.NameValidation = function () {
         var element = document.getElementById('inputName');
         var input = element.value;
-        var output = document.getElementById('nameValidationMessage');
-        if (output != null) {
+        var output = document.getElementById('NameValidationMessage');
+        if (output !== null) {
             if (input.length === 0) {
                 output.innerHTML = "<span style='color: blue'>* Field Name is required</span>";
             }
@@ -22,11 +22,23 @@ var Validations = /** @class */ (function () {
     };
     //Phone Validation
     Validations.prototype.PhoneNumberValidation = function () {
+        var element = document.getElementById('inputPhone');
+        var output = document.getElementById('PhoneValidationMessage');
+        var input = element.value;
+        var telRE = /^[2-9]\d{2}-\d{3}-\d{4}$/;
+        if (output != null) {
+            if (!input.match(telRE)) {
+                output.innerHTML = "<span style='color: blue'>* Entered wrong telephone number.Use format(XXX-XXX-XXX)</span>";
+            }
+            else {
+                output.innerHTML = '';
+            }
+        }
     };
     //Email validation
     Validations.prototype.EmailValidation = function () {
         var element = document.getElementById('inputEmail');
-        var output = document.getElementById('emailValidationMessage');
+        var output = document.getElementById('EmailValidationMessage');
         var input = element.value;
         var mailRE = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if (output != null) {
@@ -44,11 +56,15 @@ window.onload = function () {
     var obj = new Validations();
     var nameInput = document.getElementById('inputName');
     var emailInput = document.getElementById('inputEmail');
+    var phoneInput = document.getElementById('inputPhone');
     if (nameInput != null) {
         nameInput.onblur = obj.NameValidation;
     }
     if (emailInput != null) {
         emailInput.onblur = obj.EmailValidation;
+    }
+    if (phoneInput != null) {
+        phoneInput.onblur = obj.PhoneNumberValidation;
     }
 };
 // NameValidation() {

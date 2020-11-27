@@ -1,15 +1,16 @@
-﻿console.log("Hello from Typescript")
+﻿
+console.log("Hello from Typescript")
 
 
 class Validations {
 
-
+    
     NameValidation() {
         const element = document.getElementById('inputName') as HTMLInputElement;
         const input = element.value;
-        const output = document.getElementById('nameValidationMessage');
+        const output = document.getElementById('NameValidationMessage');
 
-        if (output != null) {
+        if (output !== null) {
             if (input.length === 0) {
                 output.innerHTML = "<span style='color: blue'>* Field Name is required</span>";
             }
@@ -30,12 +31,27 @@ class Validations {
     //Phone Validation
     PhoneNumberValidation() {
 
+        const element = document.getElementById('inputPhone') as HTMLInputElement;
+        const output = document.getElementById('PhoneValidationMessage');
+        const input = element.value;
+        const telRE = /^[2-9]\d{2}-\d{3}-\d{4}$/;
+
+        if (output != null) {
+            if (!input.match(telRE)) {
+                output.innerHTML = "<span style='color: blue'>* Entered wrong telephone number.Use format(XXX-XXX-XXX)</span>";
+            }
+            else {
+                output.innerHTML = '';
+            }
+
+        }
+
     }
 
     //Email validation
     EmailValidation() {
         const element = document.getElementById('inputEmail') as HTMLInputElement;
-        const output = document.getElementById('emailValidationMessage');
+        const output = document.getElementById('EmailValidationMessage');
         const input = element.value;
         const mailRE = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
@@ -61,6 +77,7 @@ window.onload = () => {
     const obj = new Validations();
     const nameInput = document.getElementById('inputName');
     const emailInput = document.getElementById('inputEmail');
+    const phoneInput = document.getElementById('inputPhone');
 
 
     if (nameInput != null) {
@@ -70,6 +87,10 @@ window.onload = () => {
     if (emailInput != null) {
 
         emailInput.onblur = obj.EmailValidation;
+    }
+    if (phoneInput != null) {
+
+        phoneInput.onblur = obj. PhoneNumberValidation;
     }
 
 
