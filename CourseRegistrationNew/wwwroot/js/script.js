@@ -11,7 +11,7 @@ var Validations = /** @class */ (function () {
             if (input.length === 0) {
                 output.innerHTML = "<span style='color: blue'>* Field Name is required</span>";
             }
-            else if (input.length >= 50) {
+            else if (input.length >= 20) {
                 output.innerHTML = "<span style='color: blue'>* Field Name length should be less than 50</span>";
             }
             else {
@@ -35,7 +35,6 @@ var Validations = /** @class */ (function () {
             }
         }
     };
-    //Phone Validation
     Validations.prototype.PhoneNumberValidation = function () {
         var element = document.getElementById('inputPhone');
         var output = document.getElementById('PhoneValidationMessage');
@@ -50,7 +49,6 @@ var Validations = /** @class */ (function () {
             }
         }
     };
-    //Email validation
     Validations.prototype.EmailValidation = function () {
         var element = document.getElementById('inputEmail');
         var output = document.getElementById('EmailValidationMessage');
@@ -65,6 +63,25 @@ var Validations = /** @class */ (function () {
             }
         }
     };
+    Validations.prototype.CourseNumberValidation = function () {
+        var element = document.getElementById('inputCourseN');
+        var input = element.value;
+        var output = document.getElementById('CourseNumberMessage');
+        if (output != null) {
+            if (isNaN(+input)) {
+                output.innerHTML = "<span style='color: blue'>* Field should be Numeric</span>";
+            }
+            else if (input.length === 0) {
+                output.innerHTML = "<span style='color: blue'>* Field Price is required</span>";
+            }
+            else if (input.length >= 3) {
+                output.innerHTML = "<span style='color: blue'>* Field length should be less than 3</span>";
+            }
+            else {
+                output.innerHTML = '';
+            }
+        }
+    };
     return Validations;
 }());
 window.onload = function () {
@@ -73,6 +90,7 @@ window.onload = function () {
     var lastnameInput = document.getElementById('inputLastName');
     var emailInput = document.getElementById('inputEmail');
     var phoneInput = document.getElementById('inputPhone');
+    var courseNumberInput = document.getElementById('inputCourseN');
     if (nameInput != null) {
         nameInput.onblur = obj.NameValidation;
     }
@@ -85,50 +103,8 @@ window.onload = function () {
     if (phoneInput != null) {
         phoneInput.onblur = obj.PhoneNumberValidation;
     }
+    if (courseNumberInput != null) {
+        courseNumberInput.onblur = obj.CourseNumberValidation;
+    }
 };
-// NameValidation() {
-//console.log(element.value);
-// console.log(document.getElementsByName('inputName'));
-//console.log(document.getElementsByName('NameValidationMessage'));
-// const elements = (<HTMLTextAreaElement>document.getElementsByName('inputName'));
-var outputs = document.getElementsByName('NameValidationMessage');
-//  for (let i = 0; i < elements.length; i++) {
-//     if (elements[i].value.length === 0) {
-//        outputs[i].innerHTML = "<span style='color: red'>* Field Name is required</span>";
-//      } else if (elements[i].value.length >= 50) {
-//        outputs[i].innerHTML = "<span style='color: red'>* Field Name length should be less than 50</span>";
-//      }
-//     else {
-//       outputs[i].innerHTML = '';
-//     }
-// }
-/*
-const input = elements.value;
-
-const output = document.getElementById('NameValidationMessage') as HTMLInputElement;;
-
-if (input.length === 0) {
-    output.innerHTML = "<span style='color: red'>* Field Name is required</span>";
-}
-else if (input.length >= 50) {
-    output.innerHTML = "<span style='color: red'>* Field Name length should be less than 50</span>";
-}
-else {
-    output.innerHTML = '';
-}
-
-console.log(element.value);
-
-// }
-*/
-// let nameInputs = document.getElementsByName('inputName');
-// let emailInput = document.getElementById('inputEmail');
-// let phoneInput = document.getElementById('inputPhone');
-//  if (nameInputs != null) {
-//     nameInputs.forEach(elm => elm.onblur = obj.NameValidation);
-//nameInput.onblur = obj.NameValidation();
-//  }
-//     nameInput.onblur = obj.NameValidation;
-// emailInput.onblur = obj.EmailValidation();
-// phoneInput.onblur = obj.PhoneNumberValidation();
 //# sourceMappingURL=script.js.map
